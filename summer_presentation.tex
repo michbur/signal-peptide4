@@ -55,6 +55,8 @@
 \usepackage{amsmath}
 \usepackage[notocbib]{apacite}
 \usepackage{epstopdf}
+\usepackage{booktabs}
+\usepackage{colortbl, xcolor}
 
 \setbeamertemplate{caption}{\centering\insertcaption\par}
 \setlength{\belowcaptionskip}{15pt}
@@ -104,15 +106,6 @@ To improve our model, we added few supplementary states representing specific mo
 \end{frame}
 
 
-\begin{frame}
-Assumptions:
-\begin{enumerate}
-\item The optimal number of amino acid groups is 4.
-\item Important properties are: size, polarity, charge, hydrophobicity and probability of being in the $\alpha$-chain. 
-\item All properties above are equally important and distinguish signal peptides from matures proteins.
-\end{enumerate}
-\end{frame}
-
 \AtBeginSection[]
 {
 \begin{frame}<beamer>
@@ -121,8 +114,45 @@ Assumptions:
 \end{frame}
 }
 
+\section{Impact of the n-gram extension}
 
-\section{Amino acid properties}
+\begin{frame}
+
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-2-1} 
+
+\end{frame}
+
+\begin{frame}
+% latex table generated in R 3.2.1 by xtable 1.7-4 package
+% Sun Jul 05 16:45:36 2015
+\begin{table}[ht]
+\centering
+\caption{Performance of different classifiers.} 
+\begin{tabular}{rrrrrr}
+  \toprule
+ & AUC & TP & TN & FP & FN \\ 
+  \midrule
+signalPnotm & 0.9416 &   208 &   195 &    19 &     6 \\ 
+   \rowcolor[gray]{0.85}signalPtm & 0.9673 &   205 &   209 &     5 &     9 \\ 
+  predsi & 0.8949 &   194 &   189 &    25 &    20 \\ 
+   \rowcolor[gray]{0.85}phobius & 0.9509 &   207 &   200 &    14 &     7 \\ 
+  philius & 0.9369 &   204 &   197 &    17 &    10 \\ 
+   \rowcolor[gray]{0.85}signalHsmm2010 & 0.9526 &   198 &   191 &    23 &    16 \\ 
+  signalHsmm1989 & 0.9562 &   202 &   194 &    20 &    12 \\ 
+   \rowcolor[gray]{0.85}signalKmer & 0.9695 &   206 &   194 &    20 &     8 \\ 
+   \bottomrule
+\end{tabular}
+\end{table}
+
+\end{frame}
+
+
+
+
+
+
+
+\section{Greedy n-gram choosing algorithm}
 
 \begin{frame}
 bla

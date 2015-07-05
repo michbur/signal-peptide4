@@ -6,6 +6,8 @@
 \usepackage{amsmath}
 \usepackage[notocbib]{apacite}
 \usepackage{epstopdf}
+\usepackage{booktabs}
+\usepackage{colortbl, xcolor}
 
 \setbeamertemplate{caption}{\centering\insertcaption\par}
 \setlength{\belowcaptionskip}{15pt}
@@ -79,15 +81,6 @@ To improve our model, we added few supplementary states representing specific mo
 \end{frame}
 
 
-\begin{frame}
-Assumptions:
-\begin{enumerate}
-\item The optimal number of amino acid groups is 4.
-\item Important properties are: size, polarity, charge, hydrophobicity and probability of being in the $\alpha$-chain. 
-\item All properties above are equally important and distinguish signal peptides from matures proteins.
-\end{enumerate}
-\end{frame}
-
 \AtBeginSection[]
 {
 \begin{frame}<beamer>
@@ -96,8 +89,42 @@ Assumptions:
 \end{frame}
 }
 
+\section{Impact of the n-gram extension}
 
-\section{Amino acid properties}
+\begin{frame}
+<<echo = FALSE,message=FALSE,results='asis', fig.height=5.8>>=
+load("ngram_extension.RData")
+
+levels(plot_dat[["sig"]]) <- c("No", "Yes")
+
+ggplot(plot_dat, aes(x=noMer,y=kMer, color=sig)) +
+  geom_point() + 
+  xlab("Normal model") + 
+  ylab("Extended model") + 
+  scale_color_discrete("Signal peptide") +
+  geom_abline(slope=1) +
+  theme_presentation +
+  theme(legend.position="bottom")
+@
+\end{frame}
+
+\begin{frame}
+<<echo = FALSE,message=FALSE,results='asis'>>=
+rws <- seq(1, nrow(bench_metrics2) - 1, by = 2)
+col <- rep("\\rowcolor[gray]{0.85}", length(rws))
+print(xtable(bench_metrics2[, c("AUC", "TP", "TN", "FP", "FN")], "Performance of different classifiers.", digits = 4), include.rownames = TRUE, booktabs = TRUE,
+      add.to.row = list(pos = as.list(rws), command = col), sanitize.text.function = identity,
+      caption.placement = "top")
+@
+\end{frame}
+
+
+
+
+
+
+
+\section{Greedy n-gram choosing algorithm}
 
 \begin{frame}
 bla
