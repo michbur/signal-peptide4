@@ -124,7 +124,7 @@ To improve our model, we added few supplementary states representing specific mo
 
 \begin{frame}
 % latex table generated in R 3.2.1 by xtable 1.7-4 package
-% Mon Jul 06 02:50:49 2015
+% Mon Jul 06 03:58:57 2015
 \begin{table}[ht]
 \centering
 \caption{Performance of different classifiers.} 
@@ -157,6 +157,12 @@ signalPnotm & 0.9416 &   208 &   195 &    19 &     6 \\
 \end{frame}
 
 
+\begin{frame}
+
+Considering 2525 sequences, 149 (5.9\%) are wrongly recognized.
+
+\end{frame}
+
 \subsection{Amino acid sequences}
 
 \begin{frame}
@@ -183,7 +189,7 @@ signalPnotm & 0.9416 &   208 &   195 &    19 &     6 \\
 
 \begin{frame}
 % latex table generated in R 3.2.1 by xtable 1.7-4 package
-% Mon Jul 06 02:50:51 2015
+% Mon Jul 06 03:58:59 2015
 \begin{table}[ht]
 \centering
 \begin{tabular}{l}
@@ -214,12 +220,45 @@ D, E, H, K, N, Q, R \\
 
 \end{frame}
 
-\section{Greedy n-gram choosing algorithm}
+\section{Heuristic algorithm}
 
 \begin{frame}
-bla
+The heuristic algorithm relies on presence of some amino acids to define borders of regions.
+
+According to the origingal authors, C-region is recognized by a presence of: R, H, K, D, E.
 \end{frame}
 
+\begin{frame}
+\begin{figure}[ht]\centering
+\includegraphics[scale=0.42]{enccomp}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+% latex table generated in R 3.2.1 by xtable 1.7-4 package
+% Mon Jul 06 03:59:01 2015
+\begin{table}[ht]
+\centering
+\begin{tabular}{l}
+  \hline
+Groups \\ 
+  \hline
+D, E, H, K, N, Q, R \\ 
+  G, P, S, T, Y \\ 
+  F, I, L, M, V, W \\ 
+  A, C \\ 
+   \hline
+\end{tabular}
+\caption{Classification of amino acids used by signalHsmm.} 
+\end{table}
+
+\end{frame}
+
+\begin{frame}
+
+After addition of G, S, T, P, Y, 135 (5.3\%) sequences are wrongly recognized (compared to 149).
+
+\end{frame}
 
 
 \end{document}

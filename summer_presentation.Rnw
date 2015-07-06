@@ -129,6 +129,12 @@ print(xtable(bench_metrics2[, c("AUC", "TP", "TN", "FP", "FN")], "Performance of
 \end{frame}
 
 
+\begin{frame}
+
+Considering 2525 sequences, 149 (5.9\%) are wrongly recognized.
+
+\end{frame}
+
 \subsection{Amino acid sequences}
 
 \begin{frame}
@@ -222,12 +228,33 @@ ggplot(cs_bigram1d, aes(x = pos, y = freq, fill = rec)) +
 @
 \end{frame}
 
-\section{Greedy n-gram choosing algorithm}
+\section{Heuristic algorithm}
 
 \begin{frame}
-bla
+The heuristic algorithm relies on presence of some amino acids to define borders of regions.
+
+According to the origingal authors, C-region is recognized by a presence of: R, H, K, D, E.
 \end{frame}
 
+\begin{frame}
+\begin{figure}[ht]\centering
+\includegraphics[scale=0.42]{enccomp}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+<<echo = FALSE,message=FALSE,results='asis'>>=
+print(xtable(group2df(aaaggregation),
+             caption = "Classification of amino acids used by signalHsmm."),
+      include.rownames = FALSE)
+@
+\end{frame}
+
+\begin{frame}
+
+After addition of G, S, T, P, Y, 135 (5.3\%) sequences are wrongly recognized (compared to 149).
+
+\end{frame}
 
 
 \end{document}
