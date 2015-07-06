@@ -3,7 +3,14 @@ library(ggplot2)
 library(dplyr)
 library(biogram)
 library(seqinr)
-librfary(signalHsmm)
+library(signalHsmm)
+
+
+if(Sys.info()["nodename"] == "MICHALKOMP" )
+  pathway <- "C:/Users/Michal/Dropbox/signal-peptide2_data/"
+
+if(Sys.info()["nodename"] == "phobos" )
+  pathway <- "/home/michal/Dropbox/signal-peptide2_data/"
 
 #read all seqs
 seqs <- c(read_uniprot(paste0(pathway, "sp2010_2015.txt"), euk = TRUE),

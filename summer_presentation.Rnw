@@ -110,9 +110,9 @@ ggplot(plot_dat, aes(x=noMer,y=kMer, color=sig)) +
 
 \begin{frame}
 <<echo = FALSE,message=FALSE,results='asis'>>=
-rws <- seq(1, nrow(bench_metrics2) - 1, by = 2)
+rws <- seq(1, 8 - 1, by = 2)
 col <- rep("\\rowcolor[gray]{0.85}", length(rws))
-print(xtable(bench_metrics2[, c("AUC", "TP", "TN", "FP", "FN")], "Performance of different classifiers.", digits = 4), include.rownames = TRUE, booktabs = TRUE,
+print(xtable(bench_metrics2[1L:8, c("AUC", "TP", "TN", "FP", "FN")], "Performance of different classifiers.", digits = 4), include.rownames = TRUE, booktabs = TRUE,
       add.to.row = list(pos = as.list(rws), command = col), sanitize.text.function = identity,
       caption.placement = "top")
 @
@@ -256,5 +256,16 @@ After addition of G, S, T, P, Y, 135 (5.3\%) sequences are wrongly recognized (c
 
 \end{frame}
 
+\section{Summary table}
+
+\begin{frame}
+<<echo = FALSE,message=FALSE,results='asis'>>=
+rws <- seq(1, nrow(bench_metrics2) - 1, by = 2)
+col <- rep("\\rowcolor[gray]{0.85}", length(rws))
+print(xtable(bench_metrics2[, c("AUC", "TP", "TN", "FP", "FN")], "Performance of different classifiers.", digits = 4), include.rownames = TRUE, booktabs = TRUE,
+      add.to.row = list(pos = as.list(rws), command = col), sanitize.text.function = identity,
+      caption.placement = "top")
+@
+\end{frame}
 
 \end{document}
