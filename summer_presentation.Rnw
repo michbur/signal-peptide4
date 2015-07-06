@@ -45,7 +45,7 @@ theme_presentation <- theme(plot.background=element_rect(fill = "transparent",
                       axis.text.y = element_text(size=7),
                       axis.title.x = element_text(size=11, vjust = -1), 
                       axis.title.y = element_text(size=11, vjust = 1),
-                      strip.text = element_text(size=11),
+                      strip.text = element_text(size=8),
                       legend.text = element_text(size=7), 
                       legend.title = element_text(size=11),
                       plot.title = element_text(size=17),
@@ -118,11 +118,109 @@ print(xtable(bench_metrics2[, c("AUC", "TP", "TN", "FP", "FN")], "Performance of
 @
 \end{frame}
 
+\section{Differences in cleavage site composition}
+
+\begin{frame}
+\begin{enumerate}
+\item Train signalHsmm on all sequences with signal peptide.
+\item Test signalHsmm on training set.
+\item Assign label "not recognized" to not recognized sequences.
+\end{enumerate}
+\end{frame}
+
+
+\subsection{Amino acid sequences}
+
+\begin{frame}
+<<echo = FALSE,message=FALSE,results='asis', fig.height=5.8>>=
+load("sumpres.RData")
+
+ggplot(cs_unigram, aes(x = pos, y = freq, fill = rec)) +
+  geom_bar(position = "dodge", stat = "identity") +
+  facet_wrap(~aa, ncol = 5) + 
+  scale_x_discrete("Position") +
+  scale_y_continuous("Frequency") + 
+  scale_fill_discrete("Identified") +
+  theme_presentation +
+  theme(legend.position="bottom")
+@
+\end{frame}
+
+\begin{frame}
+<<echo = FALSE,message=FALSE,results='asis', fig.height=5.8>>=
+load("sumpres.RData")
+
+ggplot(cs_bigram0, aes(x = pos, y = freq, fill = rec)) +
+  geom_bar(position = "dodge", stat = "identity") +
+  facet_wrap(~aa, ncol = 5) + 
+  scale_x_discrete("Position") +
+  scale_y_continuous("Frequency") + 
+  scale_fill_discrete("Identified") +
+  theme_presentation +
+  theme(legend.position="bottom") +
+  ggtitle("2-grams, distance 0")
+@
+\end{frame}
 
 
 
+\begin{frame}
+<<echo = FALSE,message=FALSE,results='asis', fig.height=5.8>>=
+ggplot(cs_bigram1, aes(x = pos, y = freq, fill = rec)) +
+  geom_bar(position = "dodge", stat = "identity") +
+  facet_wrap(~aa, ncol = 5) + 
+  scale_x_discrete("Position") +
+  scale_y_continuous("Frequency") + 
+  scale_fill_discrete("Identified") +
+  theme_presentation +
+  theme(legend.position="bottom") +
+  ggtitle("2-grams, distance 1")
+@
+\end{frame}
+
+\subsection{Degenerated amino acid sequences}
+
+\begin{frame}
+<<echo = FALSE,message=FALSE,results='asis'>>=
+group2df <- function(group_list)
+  data.frame(Groups = sapply(group_list, function(i)
+    paste0(toupper(sort(i)), collapse = ", ")))
+
+print(xtable(group2df(aaaggregation),
+             caption = "Classification of amino acids used by signalHsmm."),
+      include.rownames = FALSE)
+
+@
+\end{frame}
 
 
+\begin{frame}
+<<echo = FALSE,message=FALSE,results='asis', fig.height=5.8>>=
+ggplot(cs_bigram0d, aes(x = pos, y = freq, fill = rec)) +
+  geom_bar(position = "dodge", stat = "identity") +
+  facet_wrap(~aa, ncol = 5) + 
+  scale_x_discrete("Position") +
+  scale_y_continuous("Frequency") + 
+  scale_fill_discrete("Identified") +
+  theme_presentation +
+  theme(legend.position="bottom") +
+  ggtitle("2-grams (degenerated), distance 0")
+@
+\end{frame}
+
+\begin{frame}
+<<echo = FALSE,message=FALSE,results='asis', fig.height=5.8>>=
+ggplot(cs_bigram1d, aes(x = pos, y = freq, fill = rec)) +
+  geom_bar(position = "dodge", stat = "identity") +
+  facet_wrap(~aa, ncol = 5) + 
+  scale_x_discrete("Position") +
+  scale_y_continuous("Frequency") + 
+  scale_fill_discrete("Identified") +
+  theme_presentation +
+  theme(legend.position="bottom") +
+  ggtitle("2-grams (degenerated), distance 1")
+@
+\end{frame}
 
 \section{Greedy n-gram choosing algorithm}
 

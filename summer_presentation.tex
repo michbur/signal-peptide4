@@ -124,7 +124,7 @@ To improve our model, we added few supplementary states representing specific mo
 
 \begin{frame}
 % latex table generated in R 3.2.1 by xtable 1.7-4 package
-% Sun Jul 05 16:45:36 2015
+% Mon Jul 06 02:50:49 2015
 \begin{table}[ht]
 \centering
 \caption{Performance of different classifiers.} 
@@ -146,11 +146,73 @@ signalPnotm & 0.9416 &   208 &   195 &    19 &     6 \\
 
 \end{frame}
 
+\section{Differences in cleavage site composition}
+
+\begin{frame}
+\begin{enumerate}
+\item Train signalHsmm on all sequences with signal peptide.
+\item Test signalHsmm on training set.
+\item Assign label "not recognized" to not recognized sequences.
+\end{enumerate}
+\end{frame}
+
+
+\subsection{Amino acid sequences}
+
+\begin{frame}
+
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-4-1} 
+
+\end{frame}
+
+\begin{frame}
+
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-5-1} 
+
+\end{frame}
 
 
 
+\begin{frame}
+
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-6-1} 
+
+\end{frame}
+
+\subsection{Degenerated amino acid sequences}
+
+\begin{frame}
+% latex table generated in R 3.2.1 by xtable 1.7-4 package
+% Mon Jul 06 02:50:51 2015
+\begin{table}[ht]
+\centering
+\begin{tabular}{l}
+  \hline
+Groups \\ 
+  \hline
+D, E, H, K, N, Q, R \\ 
+  G, P, S, T, Y \\ 
+  F, I, L, M, V, W \\ 
+  A, C \\ 
+   \hline
+\end{tabular}
+\caption{Classification of amino acids used by signalHsmm.} 
+\end{table}
+
+\end{frame}
 
 
+\begin{frame}
+
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-8-1} 
+
+\end{frame}
+
+\begin{frame}
+
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-9-1} 
+
+\end{frame}
 
 \section{Greedy n-gram choosing algorithm}
 
